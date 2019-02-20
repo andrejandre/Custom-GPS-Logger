@@ -10,8 +10,8 @@ The repository for the research project is available at: https://github.com/andr
 
 ## Implementation
 To get started, the view controller containing the functionality for this app will require the following libraries:
-    ```swift
+    
     import UIKit
     import CoreLocation
     import MapKit
-    ```
+    
