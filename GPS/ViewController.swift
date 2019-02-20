@@ -26,7 +26,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate
     var locationManager: CLLocationManager!
     var i = 0.0 // global var for time logging
     var earthRadius = 6371000.00 // meters
-    // Variables for CSV:
+    
+    // Variables for CSV exports:
     var currentTime = [Double]()
     var userLatitude = [Double]()
     var userLongitude = [Double]()
@@ -38,6 +39,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        // Instantiating the map
         mapView.delegate = self as? MKMapViewDelegate
         mapView.showsUserLocation = true
         mapView.mapType = MKMapType(rawValue: 1)!
@@ -52,48 +55,42 @@ class ViewController: UIViewController, CLLocationManagerDelegate
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
         
-        if CLLocationManager.locationServicesEnabled()
-        {
-            locationManager.startUpdatingLocation()
-            locationManager.startUpdatingHeading()
+        _ = Timer.scheduledTimer(withTimeInterval: 0.00125, repeats: true)
+        {(timer) in
+            self.i += timer.timeInterval
+            self.timeLabel.text = ("\(self.i)")
+            if CLLocationManager.locationServicesEnabled()
+            {
+                self.locationManager.startUpdatingLocation()
+                self.locationManager.startUpdatingHeading()
+            }
         }
+
     }
     
     // Maps user location with respect to time to a variety of variables
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
     {
         let userLocation:CLLocation = locations[0] as CLLocation
-        
-        // Call stopUpdatingLocation() to stop listening for location updates,
-        // other wise this function will be called every time when user location changes.
-        
-        _ = Timer.scheduledTimer(withTimeInterval: 0.00125, repeats: true)
-        {
-            (timer) in
-            self.i += timer.timeInterval
-            print("Time (s): \(self.i)")
-            print("Latitude: \(userLocation.coordinate.latitude)")
-            print("Longitude: \(userLocation.coordinate.longitude)")
-            print("X (M): \(self.earthRadius * cos(userLocation.coordinate.latitude) * cos(userLocation.coordinate.longitude))")
-            print("Y (M): \(self.earthRadius * cos(userLocation.coordinate.latitude) * sin(userLocation.coordinate.longitude))")
-            self.timeLabel.text = ("\(self.i)")
-            self.latitudeLabel.text = "\(userLocation.coordinate.latitude)"
-            self.longitudeLabel.text = "\(userLocation.coordinate.longitude)"
-            self.xCoordLabel.text = ("\(self.earthRadius * cos(userLocation.coordinate.latitude) * cos(userLocation.coordinate.longitude))")
-            self.yCoordLabel.text = ("\(self.earthRadius * cos(userLocation.coordinate.latitude) * sin(userLocation.coordinate.longitude))")
-            self.currentTime.append(self.i)
-            self.userLatitude.append(Double(userLocation.coordinate.latitude))
-            self.userLongitude.append(Double(userLocation.coordinate.longitude))
-            self.userX.append(Double(self.earthRadius * cos(userLocation.coordinate.latitude) * cos(userLocation.coordinate.longitude)))
-            self.userY.append(Double(self.earthRadius * cos(userLocation.coordinate.latitude) * cos(userLocation.coordinate.longitude)))
-            self.newLine.append("\(self.i), \(userLocation.coordinate.latitude), \(userLocation.coordinate.longitude), \(self.earthRadius * cos(userLocation.coordinate.latitude) * cos(userLocation.coordinate.longitude)), \(self.earthRadius * cos(userLocation.coordinate.latitude) * sin(userLocation.coordinate.longitude))\n")
-        }
-        
+        print("Time (s): \(self.i)")
+        print("Latitude: \(userLocation.coordinate.latitude)")
+        print("Longitude: \(userLocation.coordinate.longitude)")
+        print("X (M): \(self.earthRadius * cos(userLocation.coordinate.latitude) * cos(userLocation.coordinate.longitude))")
+        print("Y (M): \(self.earthRadius * cos(userLocation.coordinate.latitude) * sin(userLocation.coordinate.longitude))")
+        self.latitudeLabel.text = "\(userLocation.coordinate.latitude)"
+        self.longitudeLabel.text = "\(userLocation.coordinate.longitude)"
+        self.xCoordLabel.text = ("\(self.earthRadius * cos(userLocation.coordinate.latitude) * cos(userLocation.coordinate.longitude))")
+        self.yCoordLabel.text = ("\(self.earthRadius * cos(userLocation.coordinate.latitude) * sin(userLocation.coordinate.longitude))")
+        self.currentTime.append(self.i)
+        self.userLatitude.append(Double(userLocation.coordinate.latitude))
+        self.userLongitude.append(Double(userLocation.coordinate.longitude))
+        self.userX.append(Double(self.earthRadius * cos(userLocation.coordinate.latitude) * cos(userLocation.coordinate.longitude)))
+        self.userY.append(Double(self.earthRadius * cos(userLocation.coordinate.latitude) * cos(userLocation.coordinate.longitude)))
+        self.newLine.append("\(self.i), \(userLocation.coordinate.latitude), \(userLocation.coordinate.longitude), \(self.earthRadius * cos(userLocation.coordinate.latitude) * cos(userLocation.coordinate.longitude)), \(self.earthRadius * cos(userLocation.coordinate.latitude) * sin(userLocation.coordinate.longitude))\n")
         manager.stopUpdatingLocation()
         manager.stopUpdatingHeading()
     }
     
-
     // Error handling
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
     {
@@ -108,14 +105,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate
         startStop.isEnabled = false
         startStop.backgroundColor = UIColor.gray
         startStop.setTitle("logging...", for: UIControl.State.disabled)
-        
     }
     
     // Export button pressed
     @IBAction func exportPressed(_ sender: Any)
     {
         print("Export button was pressed.")
-        
         let fileName = "customGPS.csv"
         let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(fileName)
         var csvText = "Time (s), Latitude, Longitude, X (M), Y (M)\n"
@@ -153,9 +148,5 @@ class ViewController: UIViewController, CLLocationManagerDelegate
         startStop.isEnabled = true
         startStop.backgroundColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
         startStop.setTitle("START", for: UIControl.State.normal)
-        self.i = -0.24681
-        
     }
 }
-
-
