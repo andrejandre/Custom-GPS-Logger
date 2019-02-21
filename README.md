@@ -14,13 +14,13 @@ The repository for the research project is available at: https://github.com/andr
 
 ## Demo
 
-<img src="https://github.com/andrejandre/MetaMotionR-Accelerometer-Research/blob/master/Feb%2015%202019%20Data/Screen%20Shot%202019-02-16%20at%204.31.55%20PM.png" width="200" height="400">
+<img src="IMG_4356.JPG" width="200" height="400">
 
-<img src="https://github.com/andrejandre/MetaMotionR-Accelerometer-Research/blob/master/Feb%2015%202019%20Data/Screen%20Shot%202019-02-16%20at%204.31.55%20PM.png" width="200" height="400">
+<img src="IMG_4357.JPG" width="200" height="400">
 
-<img src="https://github.com/andrejandre/MetaMotionR-Accelerometer-Research/blob/master/Feb%2015%202019%20Data/Screen%20Shot%202019-02-16%20at%204.31.55%20PM.png" width="200" height="400">
+<img src="IMG_4358.JPG" width="200" height="400">
 
-<img src="https://github.com/andrejandre/MetaMotionR-Accelerometer-Research/blob/master/Feb%2015%202019%20Data/Screen%20Shot%202019-02-16%20at%204.31.55%20PM.png" width="200" height="400">
+<img src="IMG_4359.JPG" width="200" height="400">
 
 
 ## Implementation
