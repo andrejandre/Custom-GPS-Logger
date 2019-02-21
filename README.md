@@ -120,3 +120,57 @@ A ```locationManager``` must be defined, as it is called by the function ```dete
         manager.stopUpdatingLocation()
         manager.stopUpdatingHeading()
     }
+
+For error logging, the following is implemented:
+
+    // Error handling
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
+    {
+        print("Error \(error)")
+    }
+
+Then, to implement CSV exporting, we must define with ```NSURL``` file paths that trigger CSV writing and exporting upon the button press of ```export```:
+
+    // Export button pressed
+    @IBAction func exportPressed(_ sender: Any)
+    {
+        print("Export button was pressed.")
+        let fileName = "customGPS.csv"
+        let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(fileName)
+        var csvText = "Time (s), Latitude, Longitude, X (M), Y (M)\n"
+        for line in self.newLine
+        {
+            //print(line)
+            csvText.append(contentsOf: line)
+        }
+        
+        //csvText.append(contentsOf: self.newLine)
+        do
+        {
+            try csvText.write(to: path!, atomically: true, encoding: String.Encoding.utf8)
+            let vc = UIActivityViewController(activityItems: [path!], applicationActivities: [])
+            vc.excludedActivityTypes = [
+                UIActivity.ActivityType.assignToContact,
+                UIActivity.ActivityType.saveToCameraRoll,
+                UIActivity.ActivityType.postToFlickr,
+                UIActivity.ActivityType.postToVimeo,
+                UIActivity.ActivityType.postToTencentWeibo,
+                UIActivity.ActivityType.postToTwitter,
+                UIActivity.ActivityType.postToFacebook,
+                UIActivity.ActivityType.openInIBooks
+            ]
+            present(vc, animated: true, completion: nil)
+        }
+        catch
+        {
+            print("Failed to create file")
+            print("\(error)")
+        }
+        
+        self.i = 0.0
+        locationManager.stopUpdatingLocation()
+        startStop.isEnabled = true
+        startStop.backgroundColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
+        startStop.setTitle("START", for: UIControl.State.normal)
+    }
+    
