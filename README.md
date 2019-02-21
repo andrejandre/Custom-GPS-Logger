@@ -31,3 +31,20 @@ The following IBOutlet's need to be configured as well:
     @IBOutlet weak var xCoordLabel: UILabel!
     @IBOutlet weak var yCoordLabel: UILabel!
     
+For variables, the following declarations need to be made (these are necessary for time logging and CSV data):
+
+    // Variable declarations:
+    var locationManager: CLLocationManager!
+    var i = 0.0 // global var for time logging
+    var earthRadius = 6371000.00 // meters
+    
+    // Variables for CSV exports:
+    var currentTime = [Double]()
+    var userLatitude = [Double]()
+    var userLongitude = [Double]()
+    var userX = [Double]()
+    var userY = [Double]()
+    var newLine = [String]()
+    
+ 
+    
