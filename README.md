@@ -9,6 +9,8 @@ The repository for the research project is available at: https://github.com/andr
 ## Demo
 
 ## Implementation
+This is Swift 4 code developed in XCode 10.1 (10B61). This repo will not be updated to account for future updates or deprecations.
+
 To get started, the view controller containing the functionality for this app will require the following libraries:
     
     import UIKit
