@@ -46,5 +46,19 @@ For variables, the following declarations need to be made (these are necessary f
     var userY = [Double]()
     var newLine = [String]()
     
+In the ```viewDidLoad``` function, the map must be initialized (this can be configured in XCode aswell, or done progammatically as shown):
+
+    // View did load, handles basic map instantiation
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+        
+        // Instantiating the map
+        mapView.delegate = self as? MKMapViewDelegate
+        mapView.showsUserLocation = true
+        mapView.mapType = MKMapType(rawValue: 1)!
+        mapView.userTrackingMode = MKUserTrackingMode(rawValue: 2)!
+    }
+    
  
     
