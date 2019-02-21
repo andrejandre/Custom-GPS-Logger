@@ -14,13 +14,13 @@ The repository for the research project is available at: https://github.com/andr
 
 ## Demo
 
-<img src="IMG_4356.JPG" width="200" height="400">
+<img src="IMG_4356.JPG">
 
-<img src="IMG_4357.JPG" width="200" height="400">
+<img src="IMG_4357.JPG">
 
-<img src="IMG_4358.JPG" width="200" height="400">
+<img src="IMG_4358.JPG">
 
-<img src="IMG_4359.JPG" width="200" height="400">
+<img src="IMG_4359.JPG">
 
 
 ## Implementation
