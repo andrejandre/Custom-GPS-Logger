@@ -60,5 +60,38 @@ In the ```viewDidLoad``` function, the map must be initialized (this can be conf
         mapView.userTrackingMode = MKUserTrackingMode(rawValue: 2)!
     }
     
- 
+Then, an ```@IBAction func``` is created for the ```startStop``` UI button, it calls a function and begins the data logging process:
+
+    // Start button pressed
+    @IBAction func startPressed(_ sender: UIButton)
+    {
+        print("Start button was pressed.")
+        determineMyCurrentLocation()
+        startStop.isEnabled = false
+        startStop.backgroundColor = UIColor.gray
+        startStop.setTitle("logging...", for: UIControl.State.disabled)
+    }
     
+The function that triggers the GPS logging, ```determineMyCurrentLocation```, is shown below (it is the first step in the chain):
+
+    // Instantiates and initializes CLLocationManager's location updates
+    func determineMyCurrentLocation()
+    {
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+        
+        // Enables constant updates at a custom frequency using 'withTimeInterval'
+        _ = Timer.scheduledTimer(withTimeInterval: 0.00125, repeats: true)
+        {(timer) in
+            self.i += timer.timeInterval
+            self.timeLabel.text = ("\(self.i)")
+            if CLLocationManager.locationServicesEnabled()
+            {
+                self.locationManager.startUpdatingLocation()
+                self.locationManager.startUpdatingHeading()
+            }
+        }
+
+    }
