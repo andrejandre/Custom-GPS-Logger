@@ -1,7 +1,7 @@
 # Custom-GPS-Logger
 This app was made by myself, Andre Unsal, and is covered by the MIT License. Any questions or inquiries may be directed to andreunsal@gmail.com, and I am also available at https://www.linkedin.com/in/andreunsal/.
 
-Table of Contents
+## Table of Contents
 =================
 * [Intro](#Intro)
 * [Demo](#Demo)
