@@ -14,4 +14,20 @@ To get started, the view controller containing the functionality for this app wi
     import UIKit
     import CoreLocation
     import MapKit
+   
+Then, make sure you apply the follow inheritance to your class:
+
+    CLLocationManagerDelegate
+    
+The following IBOutlet's need to be configured as well:
+
+    // IBOutlet declarations
+    @IBOutlet weak var latitudeLabel: UILabel!
+    @IBOutlet weak var longitudeLabel: UILabel!
+    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var startStop: UIButton!
+    @IBOutlet weak var export: UIButton!
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var xCoordLabel: UILabel!
+    @IBOutlet weak var yCoordLabel: UILabel!
     
