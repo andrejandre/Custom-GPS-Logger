@@ -1,12 +1,28 @@
 # Custom-GPS-Logger
 This app was made by myself, Andre Unsal, and is covered by the MIT License. Any questions or inquiries may be directed to andreunsal@gmail.com, and I am also available at https://www.linkedin.com/in/andreunsal/.
 
+Table of Contents
+=================
+* [Intro](#Intro)
+* [Demo](#Demo)
+* [Implementation](#Implementation)
+
+
 ## Intro
 The app was made for iOS 12.1 with XCode version 10.1. The purpose of the app is to log GPS at a custom frequency (800 Hz) for data analytics in a university research project. The data is exported as a CSV file which is then used for analysis using Python libraries. The GPS coordinates are converted to cartesian coordinates in real-time by taking into account earth's radius, and the polar coordinate system.
 
 The repository for the research project is available at: https://github.com/andrejandre/MetaMotionR-Accelerometer-Research. It involves in-depth research with an accelerometer to improve on location tracking technology and algorithms. This GPS logger serves its purpose by providing valid GPS coordinates for comparison to accelerometer metrics.
 
 ## Demo
+
+<img src="https://github.com/andrejandre/MetaMotionR-Accelerometer-Research/blob/master/Feb%2015%202019%20Data/Screen%20Shot%202019-02-16%20at%204.31.55%20PM.png" width="200" height="400">
+
+<img src="https://github.com/andrejandre/MetaMotionR-Accelerometer-Research/blob/master/Feb%2015%202019%20Data/Screen%20Shot%202019-02-16%20at%204.31.55%20PM.png" width="200" height="400">
+
+<img src="https://github.com/andrejandre/MetaMotionR-Accelerometer-Research/blob/master/Feb%2015%202019%20Data/Screen%20Shot%202019-02-16%20at%204.31.55%20PM.png" width="200" height="400">
+
+<img src="https://github.com/andrejandre/MetaMotionR-Accelerometer-Research/blob/master/Feb%2015%202019%20Data/Screen%20Shot%202019-02-16%20at%204.31.55%20PM.png" width="200" height="400">
+
 
 ## Implementation
 This is Swift 4 code developed in XCode 10.1 (10B61). This repo will not be updated to account for future updates or deprecations.
@@ -175,4 +191,4 @@ Then, to implement CSV exporting, we must define with ```NSURL``` file paths tha
         startStop.backgroundColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
         startStop.setTitle("START", for: UIControl.State.normal)
     }
-    
+
