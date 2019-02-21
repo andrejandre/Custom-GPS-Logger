@@ -95,3 +95,28 @@ The function that triggers the GPS logging, ```determineMyCurrentLocation```, is
         }
 
     }
+    
+A ```locationManager``` must be defined, as it is called by the function ```determineMyCurrentLocation```:
+
+    // Maps user location with respect to time to a variety of variables
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
+    {
+        let userLocation:CLLocation = locations[0] as CLLocation
+        print("Time (s): \(self.i)")
+        print("Latitude: \(userLocation.coordinate.latitude)")
+        print("Longitude: \(userLocation.coordinate.longitude)")
+        print("X (M): \(self.earthRadius * cos(userLocation.coordinate.latitude) * cos(userLocation.coordinate.longitude))")
+        print("Y (M): \(self.earthRadius * cos(userLocation.coordinate.latitude) * sin(userLocation.coordinate.longitude))")
+        self.latitudeLabel.text = "\(userLocation.coordinate.latitude)"
+        self.longitudeLabel.text = "\(userLocation.coordinate.longitude)"
+        self.xCoordLabel.text = ("\(self.earthRadius * cos(userLocation.coordinate.latitude) * cos(userLocation.coordinate.longitude))")
+        self.yCoordLabel.text = ("\(self.earthRadius * cos(userLocation.coordinate.latitude) * sin(userLocation.coordinate.longitude))")
+        self.currentTime.append(self.i)
+        self.userLatitude.append(Double(userLocation.coordinate.latitude))
+        self.userLongitude.append(Double(userLocation.coordinate.longitude))
+        self.userX.append(Double(self.earthRadius * cos(userLocation.coordinate.latitude) * cos(userLocation.coordinate.longitude)))
+        self.userY.append(Double(self.earthRadius * cos(userLocation.coordinate.latitude) * cos(userLocation.coordinate.longitude)))
+        self.newLine.append("\(self.i), \(userLocation.coordinate.latitude), \(userLocation.coordinate.longitude), \(self.earthRadius * cos(userLocation.coordinate.latitude) * cos(userLocation.coordinate.longitude)), \(self.earthRadius * cos(userLocation.coordinate.latitude) * sin(userLocation.coordinate.longitude))\n")
+        manager.stopUpdatingLocation()
+        manager.stopUpdatingHeading()
+    }
